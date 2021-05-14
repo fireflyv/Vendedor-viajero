@@ -19,9 +19,22 @@ class Nodo:
     def getPadre(self):
         return self.padre
     
+    def getHijos(self):
+        return self.hijos
+    
     def setNombre(self, newNombre):
         self.nombre= newNombre
     
     def setPadre(self, newPadre):
         self.padre= newPadre
+
+    def setHijos(self, newHijo):
+        newHijo.setPadre(self)
+        self.hijos.append(newHijo) 
+        
+
+
+    def hablar(self, oracion):
+        print(self.nombre, ": ", oracion)
+
     

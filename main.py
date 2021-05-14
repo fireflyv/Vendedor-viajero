@@ -1,7 +1,9 @@
+from Nodo import Nodo
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 #crea la heuristica del problema en una matriz de nxn
+"""
 def crearHeuristica(n):
     #los valores de la heuristica son al azar del 0 al 100
     heuristica = np.random.randint(0, 100, (ciudades,ciudades))
@@ -40,3 +42,15 @@ while True:
     ciudades += 2
     if ciudades == 10:
         break
+    """
+node= Nodo("Miranda")   
+#node.hablar("que tal")
+#node.setHijos([1])
+
+
+node2= Nodo("A")
+node3= Nodo("B")
+node.setHijos(node2)
+node.setHijos(node3)
+print(node.getHijos()[1].getPadre().getNombre())
+print(node.getHijos())
