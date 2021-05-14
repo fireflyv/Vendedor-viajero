@@ -1,6 +1,7 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 #crea la heuristica del problema en una matriz de nxn
 def crearHeuristica(n):
     #los valores de la heuristica son al azar del 0 al 100
@@ -15,14 +16,17 @@ def crearHeuristica(n):
     return heuristica
 # grafica cantidad de ciudades vs tiempo[ms] y lo guarda en plots
 def graficar(x,y):
-    #tiempo = y
-    #ciudades =x
     plt.plot(x, y)
     plt.xlabel("Cantidad de ciudades")
     plt.ylabel("Tiempo [ms]")
     plt.title("Ciudades vs tiempo")
     plt.xticks(x)
     plt.savefig(f"plots/plot{len(x)}.png")
+#crea un csv con la cantidad de ciudades y el tiempo[ms]
+def crearCSV(x,y):
+    df =pd.DataFrame(x,y)
+    df.to_csv("plots/data.csv", header=False)
+
 
 ciudades = 4
 x= []
@@ -34,9 +38,10 @@ while True:
     #se guardan los resultados
     x.append(ciudades)
     y.append(np.random.randint(0, 100))
-    #se grafican
+    #se grafican y se guardan los datos
     graficar(x,y)
-    #las ciudades se incrementan en 2
+    crearCSV(x,y)
+    # Se incrementan las ciudades en 2
     ciudades += 2
     if ciudades == 10:
         break
