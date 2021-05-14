@@ -22,7 +22,7 @@ def graficar(x,y):
     plt.ylabel("Tiempo [ms]")
     plt.title("Ciudades vs tiempo")
     plt.xticks(x)
-    plt.savefig(f"plots/grafico{len(x)}.png")
+    plt.savefig(f"plots/plot{len(x)}.png")
 
 ciudades = 4
 x= []
