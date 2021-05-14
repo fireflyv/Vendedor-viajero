@@ -31,10 +31,3 @@ class Nodo:
     def setHijos(self, newHijo):
         newHijo.setPadre(self)
         self.hijos.append(newHijo) 
-        
-
-
-    def hablar(self, oracion):
-        print(self.nombre, ": ", oracion)
-
-    
