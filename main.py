@@ -48,6 +48,7 @@ while True:
     if ciudades == 10:
         break
  #====================================== 
+"""
 node= Nodo("Miranda")   
 
 node2= Nodo("A")
@@ -56,4 +57,4 @@ node.setHijos(node2)
 node.setHijos(node3)
 print(node.getHijos()[1].getPadre().getNombre())
 print(node.getHijos())
-      
+"""      
