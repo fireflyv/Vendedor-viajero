@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 def crearHeuristica(n):
     #los valores de la heuristica son al azar del 0 al 100
-    heuristica = np.random.randint(0, 100, (cantCiudades,cantCiudades))
+    heuristica = np.random.randint(1, 100, (cantCiudades,cantCiudades))
     # se reemplaza la diagonal por 0s
     np.fill_diagonal(heuristica,0)
     for i in range(len(heuristica)):
@@ -50,18 +50,4 @@ while True:
     cantCiudades += 2
     if cantCiudades == 10:
         break
-<<<<<<< HEAD
- #====================================== 
-"""
-node= Nodo("Miranda")   
-
-node2= Nodo("A")
-node3= Nodo("B")
-node.setHijos(node2)
-node.setHijos(node3)
-print(node.getHijos()[1].getPadre().getNombre())
-print(node.getHijos())
-"""      
-=======
  
->>>>>>> c74429a09c8113e4f8b354ce87b0182794c9060c
