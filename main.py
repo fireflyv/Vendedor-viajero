@@ -1,4 +1,6 @@
 from Nodo import Nodo
+from Arbol import Arbol
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,7 +9,7 @@ import matplotlib.pyplot as plt
 
 def crearHeuristica(n):
     #los valores de la heuristica son al azar del 0 al 100
-    heuristica = np.random.randint(0, 100, (ciudades,ciudades))
+    heuristica = np.random.randint(0, 100, (cantCiudades,cantCiudades))
     # se reemplaza la diagonal por 0s
     np.fill_diagonal(heuristica,0)
     for i in range(len(heuristica)):
@@ -30,30 +32,22 @@ def crearCSV(x,y):
     df.to_csv("plots/data.csv", header=False)
 
 
-ciudades = 4
+cantCiudades = 4
 x= []
 y =[]
 while True:
     #Se calcula la heuristica
-    heuristica = crearHeuristica(ciudades)
+    heuristica = crearHeuristica(cantCiudades)
     #se resulve el problema
+    arbol = Arbol(cantCiudades)
     #se guardan los resultados
-    x.append(ciudades)
+    x.append(cantCiudades)
     y.append(np.random.randint(0, 100))
     #se grafican y se guardan los datos
     graficar(x,y)
     crearCSV(x,y)
     # Se incrementan las ciudades en 2
-    ciudades += 2
-    if ciudades == 10:
+    cantCiudades += 2
+    if cantCiudades == 10:
         break
- #====================================== 
-node= Nodo("Miranda")   
-
-node2= Nodo("A")
-node3= Nodo("B")
-node.setHijos(node2)
-node.setHijos(node3)
-print(node.getHijos()[1].getPadre().getNombre())
-print(node.getHijos())
-      
+ 
