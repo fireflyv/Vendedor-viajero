@@ -21,13 +21,17 @@ class Nodo:
     
     def getHijos(self):
         return self.hijos
-    
+        
+    def getHijo(self,posicion):
+        return self.hijos[posicion]
+
     def setNombre(self, newNombre):
         self.nombre= newNombre
     
     def setPadre(self, newPadre):
         self.padre= newPadre
 
-    def setHijos(self, newHijo):
-        newHijo.setPadre(self)
-        self.hijos.append(newHijo) 
+    def setHijos(self, nombre):
+        hijo = Nodo(nombre)
+        hijo.setPadre(self)
+        self.hijos.append(hijo)
