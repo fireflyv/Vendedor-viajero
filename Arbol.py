@@ -37,14 +37,15 @@ class Arbol:
         orderByKey = lambda key : key[0]
         if(self.raiz): 
             open.append((0,self.raiz))
-            return self.bestFirst2(heuristica, open,close,orderByKey)
+            solucion = self.bestFirst2(heuristica, open,close,orderByKey)
+            return self.obtenerRecorrido(solucion,heuristica)
 
     def bestFirst2(self,heuristica, open, close,orderByKey):
         if len(open)> 0:
             tempNodo= open.pop()
             close.append(tempNodo)
             if len(tempNodo[1].getHijos())==0:
-                return close
+                return close.pop()[1]
             
             listaHijos = tempNodo[1].getHijos() 
             for i in range(len(listaHijos)): 
@@ -52,6 +53,20 @@ class Arbol:
                 open.append((val,listaHijos[i]))  
             open.sort(reverse=True, key=orderByKey)
             return self.bestFirst2(heuristica, open, close, orderByKey)
+
+    def obtenerRecorrido(self,nodo,heuristica):
+        recorrido = []
+        while (nodo.getPadre()):
+            ciudad = nodo.getNombre()
+            padre = nodo.getPadre().getNombre()
+            valor = heuristica[ciudad][padre]
+            recorrido.append(f"[{ciudad}]")
+            recorrido.append(valor)
+            nodo = nodo.getPadre()
+        recorrido.append(f"[{padre}]")
+        recorrido.reverse()
+        recorrido = " -> ".join(map(str, recorrido)) 
+        return recorrido
 
     def getRaiz(self):
        return self.raiz

@@ -42,8 +42,8 @@ while True:
     inicio = datetime.now()
     recorrido = arbol.bestFirst(heuristica)
     fin = datetime.now()
-    print(recorrido)
     # Se muestra el recorrido
+    print(recorrido)
     # Se guardan los resultados
     x.append(cantCiudades)
     y.append(round((fin - inicio).total_seconds()*1000,2))
@@ -52,6 +52,5 @@ while True:
     crearCSV(x,y)
     # Se incrementan las ciudades en 2
     cantCiudades += 2
-    if cantCiudades > 20:
+    if cantCiudades == 12:
         break
- 
