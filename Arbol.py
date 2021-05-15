@@ -24,7 +24,6 @@ class Arbol:
                 # se recorre la lista de hijos y por cada uno se aplica armarArbol(nodo)
                 self.armarArbol2(nodo.getHijo(i))
 
-
     def buscarPadres(self,nodo):
         padres = []
         while (nodo):
@@ -32,22 +31,18 @@ class Arbol:
             nodo = nodo.getPadre()
         return padres
 
-    def getRaiz(self):
-        return self.raiz
-
-
     def bestFirst(self, heuristica):
         open=[]
         close=[]
+        orderByKey = lambda key : key[0]
         if(self.raiz): 
             open.append((0,self.raiz))
-            return self.bestFirst2(heuristica, open,close)
+            return self.bestFirst2(heuristica, open,close,orderByKey)
 
-    def bestFirst2(self,heuristica, open, close):
+    def bestFirst2(self,heuristica, open, close,orderByKey):
         if len(open)> 0:
             tempNodo= open.pop()
             close.append(tempNodo)
-            
             if len(tempNodo[1].getHijos())==0:
                 return close
             
@@ -55,7 +50,10 @@ class Arbol:
             for i in range(len(listaHijos)): 
                 val= heuristica[tempNodo[1].getNombre()][listaHijos[i].getNombre()]
                 open.append((val,listaHijos[i]))  
-            open.sort(reverse=True)
-            self.bestFirst2(heuristica, open, close)
+            open.sort(reverse=True, key=orderByKey)
+            return self.bestFirst2(heuristica, open, close, orderByKey)
+
+    def getRaiz(self):
+       return self.raiz
             
             

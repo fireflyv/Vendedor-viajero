@@ -1,12 +1,11 @@
-from Nodo import Nodo
-from Arbol import Arbol
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from datetime import datetime
+
+from Arbol import Arbol
 
 #crea la heuristica del problema en una matriz de nxn
-
 def crearHeuristica(n):
     #los valores de la heuristica son al azar del 0 al 100
     heuristica = np.random.randint(1, 100, (cantCiudades,cantCiudades))
@@ -36,18 +35,23 @@ cantCiudades = 4
 x= []
 y =[]
 while True:
-    #Se calcula la heuristica
+    # Se calcula la heuristica
     heuristica = crearHeuristica(cantCiudades)
-    #se resulve el problema
+    # Se arma el arbol y se obtiene el recorrido con best first
     arbol = Arbol(cantCiudades)
-    #se guardan los resultados
+    inicio = datetime.now()
+    recorrido = arbol.bestFirst(heuristica)
+    fin = datetime.now()
+    print(recorrido)
+    # Se muestra el recorrido
+    # Se guardan los resultados
     x.append(cantCiudades)
-    y.append(np.random.randint(0, 100))
-    #se grafican y se guardan los datos
+    y.append(round((fin - inicio).total_seconds()*1000,2))
+    # Se grafican y se guardan los datos
     graficar(x,y)
     crearCSV(x,y)
     # Se incrementan las ciudades en 2
     cantCiudades += 2
-    if cantCiudades == 10:
+    if cantCiudades > 20:
         break
  
