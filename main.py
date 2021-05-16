@@ -63,5 +63,3 @@ while True:
     crearCSV(x,y)
     # Se incrementan las ciudades en 2
     cantCiudades += 2
-    if cantCiudades == 14:
-        break
