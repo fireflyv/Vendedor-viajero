@@ -1,3 +1,5 @@
+import os
+import errno
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -29,8 +31,15 @@ def graficar(x,y):
 def crearCSV(x,y):
     df =pd.DataFrame(x,y)
     df.to_csv("plots/data.csv", header=False)
+#Crea la carpeta plots para guardar los graficos y los datos
+def crearCarpeta():
+    try:
+        os.mkdir('plots')
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
 
-
+crearCarpeta()
 cantCiudades = 4
 x= []
 y =[]
@@ -42,15 +51,17 @@ while True:
     inicio = datetime.now()
     recorrido = arbol.bestFirst(heuristica)
     fin = datetime.now()
+    tiempo = round((fin - inicio).total_seconds()*1000,2)
     # Se muestra el recorrido
     print(recorrido)
+    print(f"Tiempo total: {tiempo} [ms]")
     # Se guardan los resultados
     x.append(cantCiudades)
-    y.append(round((fin - inicio).total_seconds()*1000,2))
+    y.append(tiempo)
     # Se grafican y se guardan los datos
     graficar(x,y)
     crearCSV(x,y)
     # Se incrementan las ciudades en 2
     cantCiudades += 2
-    if cantCiudades == 12:
+    if cantCiudades == 14:
         break

@@ -33,26 +33,24 @@ class Arbol:
 
     def bestFirst(self, heuristica):
         open=[]
-        close=[]
         orderByKey = lambda key : key[0]
         if(self.raiz): 
             open.append((0,self.raiz))
-            solucion = self.bestFirst2(heuristica, open,close,orderByKey)
+            solucion = self.bestFirst2(heuristica, open,orderByKey)
             return self.obtenerRecorrido(solucion,heuristica)
 
-    def bestFirst2(self,heuristica, open, close,orderByKey):
+    def bestFirst2(self,heuristica, open,orderByKey,lastNode = None):
         if len(open)> 0:
             tempNodo= open.pop()
-            close.append(tempNodo)
+            lastNode = tempNodo[1]
             if len(tempNodo[1].getHijos())==0:
-                return close.pop()[1]
-            
+                return lastNode
             listaHijos = tempNodo[1].getHijos() 
             for i in range(len(listaHijos)): 
                 val= heuristica[tempNodo[1].getNombre()][listaHijos[i].getNombre()]
                 open.append((val,listaHijos[i]))  
             open.sort(reverse=True, key=orderByKey)
-            return self.bestFirst2(heuristica, open, close, orderByKey)
+            return self.bestFirst2(heuristica, open, orderByKey,lastNode)
 
     def obtenerRecorrido(self,nodo,heuristica):
         recorrido = []
