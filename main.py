@@ -48,6 +48,7 @@ while True:
     heuristica = crearHeuristica(cantCiudades)
     # Se arma el arbol y se obtiene el recorrido con best first
     arbol = Arbol(cantCiudades)
+    print(arbol.foo,arbol.__var)
     inicio = datetime.now()
     recorrido = arbol.bestFirst(heuristica)
     fin = datetime.now()
